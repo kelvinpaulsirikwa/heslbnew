@@ -93,7 +93,7 @@
 <script src="{{ asset('js/newscenter.js') }}" defer></script>
 <script src="{{ asset('js/ourproduct.js') }}" defer></script>
 @endif
-<script src="https://chatbot.heslb.go.tz/chatbot_general_obs.js"></script>
+<!-- <script src="https://chatbot.heslb.go.tz/chatbot_general_obs.js"></script> -->
 
     <style>
         /* Global Font Family for Website (excluding admin pages) */
