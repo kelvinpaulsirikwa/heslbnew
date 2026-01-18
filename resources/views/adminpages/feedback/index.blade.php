@@ -220,7 +220,7 @@
         if (type === '') {
             window.location.href = "{{ route('adminpages.feedback.index') }}";
         } else {
-            window.location.href = "{{ route('feedback.byType', '') }}/" + type;
+            window.location.href = "{{ url('/adminpages/feedback/type') }}/" + type;
         }
     }
 
