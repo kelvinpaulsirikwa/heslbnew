@@ -137,13 +137,7 @@ class AuthController extends Controller
         Log::info('Login successful', ['user_id' => $user->id, 'email' => $user->email]);
 
         // Audit log for successful login
-        AuditLogService::log(
-            'login',
-            'System',
-            $user->id,
-            null,
-            ['email' => $user->email, 'ip_address' => $ipAddress]
-        );
+     
 
         // Enforce password change if required
         if ($user->must_change_password) {
@@ -197,18 +191,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Audit log for logout - pass user_id explicitly since user is already logged out
-        if ($userId) {
-            AuditLogService::log(
-                'logout',
-                'System',
-                $userId,
-                null,
-                ['email' => $userEmail, 'ip_address' => $request->ip()],
-                null,
-                $userId
-            );
-        }
+     
 
         // Clear any cached data and prevent back button issues
         return redirect()->route('login.form')
