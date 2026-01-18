@@ -131,7 +131,7 @@ class AuthController extends Controller
             ]);
         }
 
-        auth()->login($user);
+        Auth::login($user);
         $request->session()->regenerate();
 
         Log::info('Login successful', ['user_id' => $user->id, 'email' => $user->email]);
