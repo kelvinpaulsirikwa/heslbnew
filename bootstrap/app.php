@@ -11,7 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->web(\App\Http\Middleware\SetLocale::class);
+        $middleware->web([
+            \App\Http\Middleware\SetLocale::class,
+            \App\Http\Middleware\LogUniqueVisits::class,
+            \App\Http\Middleware\PreventBlockedUserActions::class,
+            \App\Http\Middleware\LoginAttemptLimiter::class,
+            \App\Http\Middleware\EnforcePasswordChange::class,
+            \App\Http\Middleware\PreventBackButton::class,
+            \App\Http\Middleware\CheckUserStatus::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
