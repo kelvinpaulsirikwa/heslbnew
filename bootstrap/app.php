@@ -20,6 +20,17 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\PreventBackButton::class,
             \App\Http\Middleware\CheckUserStatus::class,
         ]);
+
+        $middleware->alias([
+            'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+            'auth' => \App\Http\Middleware\Authenticate::class,
+            'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+            'permission' => \App\Http\Middleware\CheckPermission::class,
+            'prevent.back.button' => \App\Http\Middleware\PreventBackButton::class,
+            'prevent.blocked.actions' => \App\Http\Middleware\PreventBlockedUserActions::class,
+            'check.user.status' => \App\Http\Middleware\CheckUserStatus::class,
+            'login.attempt.limiter' => \App\Http\Middleware\LoginAttemptLimiter::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
