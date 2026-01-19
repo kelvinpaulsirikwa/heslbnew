@@ -61,8 +61,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 20px;
+        margin-right: 5px;
         flex-shrink: 0;
+        aspect-ratio: 1/1;
+        min-width: 40px;
+        min-height: 40px;
     }
 
     .shortcut-link-icon::before {
@@ -77,6 +80,8 @@
         flex-grow: 1;
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         gap: 5px;
     }
 
@@ -137,6 +142,41 @@
         grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
         gap: 20px;
         margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+        .links-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .shortcut-link {
+            width: 100%;
+            flex-direction: row !important;
+            align-items: center !important;
+            padding: 20px 25px !important;
+        }
+        
+        .shortcut-link-icon {
+            margin-right: 5px !important;
+            margin-bottom: 0 !important;
+            width: 45px !important;
+            height: 45px !important;
+            min-width: 45px !important;
+            min-height: 45px !important;
+            max-width: 45px !important;
+            max-height: 45px !important;
+            aspect-ratio: 1/1 !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+        }
+        
+        .shortcut-link-content {
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
     }
 
     .file-indicator {
@@ -287,7 +327,7 @@
     </div>
 
     <!-- Footer Info -->
-    <div class="row mt-5">
+    <!-- <div class="row mt-5">
         <div class="col-12">
             <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
                 <p style="color: #666; margin: 0;">
@@ -296,6 +336,6 @@
                 </p>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 @endsection

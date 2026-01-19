@@ -24,7 +24,7 @@
     /* Make Bootstrap icons same size as custom calendar icons in mobile view */
     @media (max-width: 767.98px) {
         .stat-box .bi.fs-1 {
-            font-size: 64px !important; /* Match custom-calendar-icon size */
+            font-size: 54px !important; /* Match custom-calendar-icon size */
             line-height: 64px !important;
         }
     }
