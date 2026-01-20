@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\PreventBackButton::class,
             \App\Http\Middleware\CheckUserStatus::class,
             \App\Http\Middleware\SecurityHeaders::class,
+            \App\Http\Middleware\SecureCookies::class,
         ]);
 
         $middleware->alias([
