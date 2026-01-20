@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\EnforcePasswordChange::class,
             \App\Http\Middleware\PreventBackButton::class,
             \App\Http\Middleware\CheckUserStatus::class,
+            \App\Http\Middleware\SecurityHeaders::class,
         ]);
 
         $middleware->alias([
