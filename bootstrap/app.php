@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web([
+            \App\Http\Middleware\ForceHttps::class,
             \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\LogUniqueVisits::class,
             \App\Http\Middleware\PreventBlockedUserActions::class,
