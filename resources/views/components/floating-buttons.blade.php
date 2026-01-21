@@ -368,20 +368,26 @@
         if (!mainBtn || !floatingMenu) return;
 
         let isMenuLocked = false;
+        let isMenuOpen = false;
         
-        mainBtn.addEventListener('click', function(e) {
+        const handleToggle = function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            isMenuLocked = !isMenuLocked;
+            // Toggle menu open/close
+            isMenuOpen = !isMenuOpen;
             
-            if (isMenuLocked) {
-                floatingMenu.classList.add('menu-locked');
-            } else {
+            if (isMenuOpen) {
                 floatingMenu.classList.remove('menu-locked');
+            } else {
+                floatingMenu.classList.add('menu-locked');
             }
             
             return false;
-        });
+        };
+        
+        // Use only touchend for mobile (more reliable than touchstart)
+        mainBtn.addEventListener('click', handleToggle);
+        mainBtn.addEventListener('touchend', handleToggle);
     });
 </script>
