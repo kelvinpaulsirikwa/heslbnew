@@ -33,7 +33,7 @@ class SecurityHeaders
         // that doesn't require unsafe-eval, or use nonces/hashes for inline scripts in the future.
         $cspDirectives = [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com", // unsafe-eval required for CKEditor
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://chatbot.heslb.go.tz", // unsafe-eval required for CKEditor
             "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://fonts.googleapis.com",
             "font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://fonts.gstatic.com",
             "img-src 'self' data: blob: https: http:",
