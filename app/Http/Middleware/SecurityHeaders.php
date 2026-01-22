@@ -18,53 +18,99 @@ class SecurityHeaders
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
-        
-        // Prevent clickjacking attacks
-        // X-Frame-Options: Prevents page from being displayed in a frame/iframe
-        // 'SAMEORIGIN' allows framing by same origin only, 'DENY' blocks all framing
+
+        /*
+        |--------------------------------------------------------------------------
+        | Clickjacking Protection
+        |--------------------------------------------------------------------------
+        */
         $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
-        
-        // Content Security Policy (CSP)
-        // Comprehensive CSP to prevent XSS attacks while allowing necessary functionality
-        // 
-        // SECURITY NOTE: 'unsafe-eval' is included because CKEditor requires it for some features.
-        // This allows eval() and similar functions. While this reduces security, it's necessary
-        // for CKEditor to function properly. Consider migrating to a newer version of CKEditor
-        // that doesn't require unsafe-eval, or use nonces/hashes for inline scripts in the future.
+
+        /*
+        |--------------------------------------------------------------------------
+        | Content Security Policy (CSP)
+        |--------------------------------------------------------------------------
+        | NOTE:
+        | - 'unsafe-eval' is required for CKEditor
+        | - 'unsafe-inline' is allowed for legacy scripts/styles
+        | - unpkg.com added for dotlottie-player
+        | - chatbot backend added for API calls
+        */
         $cspDirectives = [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://chatbot.heslb.go.tz", // unsafe-eval required for CKEditor
-            "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://fonts.googleapis.com https://chatbot.heslb.go.tz",
-            "font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://fonts.gstatic.com https://chatbot.heslb.go.tz",
-            "img-src 'self' data: blob: https: http: https://chatbot.heslb.go.tz",
-            "connect-src 'self' https: https://chatbot.heslb.go.tz",
-            "frame-src 'self' https://chatbot.heslb.go.tz",
-            "frame-ancestors 'self'", // Prevent clickjacking
-            "object-src 'none'", // Block plugins
+
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval'
+                https://cdn.jsdelivr.net
+                https://cdnjs.cloudflare.com
+                https://cdn.bootstrapcdn.com
+                https://unpkg.com
+                https://chatbot.heslb.go.tz",
+
+            "style-src 'self' 'unsafe-inline'
+                https://cdn.jsdelivr.net
+                https://cdnjs.cloudflare.com
+                https://cdn.bootstrapcdn.com
+                https://fonts.googleapis.com
+                https://chatbot.heslb.go.tz",
+
+            "font-src 'self' data:
+                https://cdn.jsdelivr.net
+                https://cdnjs.cloudflare.com
+                https://cdn.bootstrapcdn.com
+                https://fonts.gstatic.com
+                https://chatbot.heslb.go.tz",
+
+            "img-src 'self' data: blob: https: http:
+                https://chatbot.heslb.go.tz",
+
+            "connect-src 'self'
+                https://chatbot.heslb.go.tz
+                https://chatbotbackend.heslb.go.tz",
+
+            "frame-src 'self'
+                https://chatbot.heslb.go.tz",
+
+            "frame-ancestors 'self'",
+
+            "object-src 'none'",
+
             "base-uri 'self'",
+
             "form-action 'self'",
-            // "upgrade-insecure-requests" // Upgrade HTTP to HTTPS - COMMENTED OUT: Disabled due to SSL certificate issues
+
+            // Uncomment ONLY when SSL is fully correct
+            // "upgrade-insecure-requests"
         ];
-        
-        $cspHeader = implode('; ', $cspDirectives);
-        $response->headers->set('Content-Security-Policy', $cspHeader);
-        
-        // Additional security headers for defense in depth
+
+        // Normalize CSP into a single line
+        $cspHeader = preg_replace('/\s+/', ' ', implode('; ', $cspDirectives));
+        $response->headers->set('Content-Security-Policy', trim($cspHeader));
+
+        /*
+        |--------------------------------------------------------------------------
+        | Additional Security Headers
+        |--------------------------------------------------------------------------
+        */
         $response->headers->set('X-Content-Type-Options', 'nosniff');
+
+        // Deprecated but safe to keep for legacy browsers
         $response->headers->set('X-XSS-Protection', '1; mode=block');
+
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
-        
-        // HTTP Strict Transport Security (HSTS)
-        // Tells browsers to only access the site over HTTPS, even if user types HTTP
-        // Only set on HTTPS connections and in non-local environments
-        // COMMENTED OUT: Disabled due to SSL certificate issues
-        // if ($request->secure() && !app()->environment('local')) {
-        //     // max-age: 1 year (31536000 seconds)
-        //     includeSubDomains: Apply to all subdomains
-        //     // preload: Allow inclusion in browser HSTS preload lists
-        //     $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+
+        /*
+        |--------------------------------------------------------------------------
+        | HTTP Strict Transport Security (HSTS)
+        |--------------------------------------------------------------------------
+        | Enable ONLY when SSL is valid and stable
+        */
+        // if ($request->secure() && app()->environment('production')) {
+        //     $response->headers->set(
+        //         'Strict-Transport-Security',
+        //         'max-age=31536000; includeSubDomains; preload'
+        //     );
         // }
-        
+
         return $response;
     }
 }
