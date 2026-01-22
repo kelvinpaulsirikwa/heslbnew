@@ -94,8 +94,6 @@
 <script src="{{ asset('js/ourproduct.js') }}" defer></script>
 @endif
 <script src="https://chatbot.heslb.go.tz/chatbot_general_obs.js" defer></script>
-<script src="{{ asset('js/chatbot-proxy-fix.js') }}" defer></script>
-<link rel="stylesheet" href="{{ asset('css/chatbot-layout-fix.css') }}">
 
     <style>
         /* Global Font Family for Website (excluding admin pages) */
