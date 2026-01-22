@@ -1,0 +1,105 @@
+/* Chatbot layout fixes for cross-browser compatibility */
+
+/* Force proper modal positioning */
+.chatbot-modal,
+.chatbot-container,
+[id*="chatbot"],
+[class*="chatbot"] {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 9999 !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    width: 400px !important;
+    height: 600px !important;
+}
+
+/* Ensure proper header styling */
+.chatbot-header,
+[class*="chatbot-header"],
+[id*="chatbot-header"] {
+    background: #0066cc !important;
+    color: white !important;
+    padding: 15px !important;
+    border-radius: 8px 8px 0 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Fix tab styling */
+.chatbot-tab,
+[class*="tab"] {
+    background: transparent !important;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+}
+
+.chatbot-tab.active,
+[class*="tab"].active,
+[class*="tab"]:hover {
+    background: rgba(255,255,255,0.2) !important;
+}
+
+/* Force proper content area */
+.chatbot-content,
+[class*="content"],
+[id*="content"] {
+    background: white !important;
+    padding: 20px !important;
+    height: calc(100% - 120px) !important;
+    overflow-y: auto !important;
+}
+
+/* Fix input area */
+.chatbot-input,
+[class*="input"],
+[id*="input"] {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    padding: 15px !important;
+    background: #f5f5f5 !important;
+    border-top: 1px solid #ddd !important;
+}
+
+/* Ensure buttons are visible */
+.chatbot-button,
+[class*="button"],
+button {
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    margin: 5px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    background: #0066cc !important;
+    color: white !important;
+}
+
+/* Avatar fixes */
+.chatbot-avatar,
+[class*="avatar"] {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    margin: 10px 5px !important;
+}
+
+/* Status indicator */
+.chatbot-status,
+[class*="status"] {
+    width: 12px !important;
+    height: 12px !important;
+    background: #4CAF50 !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    bottom: 2px !important;
+    right: 2px !important;
+}
