@@ -65,7 +65,10 @@ class SecurityHeaders
 
             "connect-src 'self'
                 https://chatbot.heslb.go.tz
-                https://chatbotbackend.heslb.go.tz",
+                https://chatbotbackend.heslb.go.tz
+                https://lottie.host
+                https://cdn.jsdelivr.net
+                https://unpkg.com",
 
             "frame-src 'self'
                 https://chatbot.heslb.go.tz",
