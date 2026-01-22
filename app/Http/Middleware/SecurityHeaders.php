@@ -34,11 +34,11 @@ class SecurityHeaders
         $cspDirectives = [
             "default-src 'self'",
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://chatbot.heslb.go.tz", // unsafe-eval required for CKEditor
-            "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://fonts.googleapis.com",
-            "font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://fonts.gstatic.com",
-            "img-src 'self' data: blob: https: http:",
-            "connect-src 'self' https:",
-            "frame-src 'self'",
+            "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://fonts.googleapis.com https://chatbot.heslb.go.tz",
+            "font-src 'self' data: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.bootstrapcdn.com https://fonts.gstatic.com https://chatbot.heslb.go.tz",
+            "img-src 'self' data: blob: https: http: https://chatbot.heslb.go.tz",
+            "connect-src 'self' https: https://chatbot.heslb.go.tz",
+            "frame-src 'self' https://chatbot.heslb.go.tz",
             "frame-ancestors 'self'", // Prevent clickjacking
             "object-src 'none'", // Block plugins
             "base-uri 'self'",
