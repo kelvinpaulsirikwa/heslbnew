@@ -17,6 +17,12 @@ Route::get('/lang/{lang}', function ($lang) {
 });
 
 
+// Chatbot proxy routes
+Route::prefix('chatbot-proxy')->group(function () {
+    Route::any('{path}', [App\Http\Controllers\ChatbotProxyController::class, 'proxy'])
+        ->where('path', '.*');
+});
+
 // Website routes
 require __DIR__.'/website.php';
 
