@@ -101,6 +101,11 @@ class SecurityHeaders
 
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
 
+        // Prevent debugging in production (optional)
+        if (app()->environment('production')) {
+            $response->headers->set('Content-Security-Policy', $cspHeader . '; script-src-eval false');
+        }
+
         /*
         |--------------------------------------------------------------------------
         | HTTP Strict Transport Security (HSTS)
