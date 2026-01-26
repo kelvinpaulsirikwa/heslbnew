@@ -64,6 +64,7 @@ class SecurityHeaders
                 https://chatbot.heslb.go.tz",
 
             "connect-src 'self'
+                wss://chatbothuman.heslb.go.tz
                 https://chatbot.heslb.go.tz
                 https://chatbotbackend.heslb.go.tz
                 https://lottie.host
